@@ -1,17 +1,41 @@
 package org.example;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+public class Main {
+
+    public static void testMapping() {
+        Map<String, String> mapString = new HashMap<>();
+        mapString.put("key1", "value1");
+        mapString.put("key2", "value2");
+        mapString.put("key3", "value3");
+        mapString.put("key1", "value4");
+
+        //System.out.println(mapString);
+        //keyset er collections og returner et sæt - ikke sorteret.
+        for(String s: mapString.keySet()) {
+            //System.out.println(s);
         }
+        mapString.forEach((key, value) ->System.out.println( key + "value=" + value));
+
     }
+    public static void main(String[] args) {
+
+        List<String> words = Arrays.asList("mand", "han", "dig");
+        String urlEb = "https://ekstrabladet.dk/";
+        UrlReader urlReader = new UrlReader();
+        Map<String, Integer> mapWords = urlReader.readUrl(urlEb, words);
+        mapWords.forEach((key, value) -> System.out.println(key + "value=" + " " + value));
+
+        //var obj =("hej med dig".indexOf("hej"));
+        //System.out.println(obj);
+
+
+
+    }
+
+
 }

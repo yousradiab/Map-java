@@ -1,37 +1,46 @@
 package org.example;
 
 import java.io.*;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-public class ReadURL {
+public class UrlReader {
 
-    public  URLReader(String url, String fileName) {
-        try {
-            //step 1
-            URL urlLink = new URL(url);
-            System.out.println(" URL: " + urlLink);
-
-            //Readers
-            InputStream stream = urlLink.openStream();
-            InputStreamReader inputReader = new InputStreamReader(stream);
-            BufferedReader reader = new BufferedReader(inputReader);
-
-            //Writers
-            FileWriter filewriter = new FileWriter(fileName);
-            BufferedWriter writer = new BufferedWriter(filewriter);
-            String inputLine = "";
-            while
-            (inputLine != null) {
-                //step 2
-                inputLine = reader.readLine();
-
-
-
-                writer.write(inputLine);
-            }
-        } catch (Exception e) {
+    public Map<String, Integer> readUrl(String strUrl, List<String> words) {
+        Map<String, Integer> mapWords = new HashMap<>();
+        for(String ss: words) {
+            mapWords.put(ss,0);
         }
+
+       try {
+            URL url = new URL(strUrl);
+        try {
+            URLConnection urlConnection = url.openConnection();
+            BufferedReader  bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+            String line = "";
+            while (line != null) {
+                for (String word: words) {
+                    if(line.indexOf(word) >= 0) {
+                        Integer ii = mapWords.get(word);
+                        ii++;
+                        mapWords.put(word, ii);
+                    }
+                }
+                line = bufferedReader.readLine();
+
+            }
+        }catch (IOException io) {
+            System.out.println(io.getMessage());
+        }
+        } catch (MalformedURLException e) {
+            System.out.println("kan ikke læse URL=" + " " + strUrl + " " + e.getMessage());
+        }
+
+
+        return mapWords;
     }
-
-};
-
+}
