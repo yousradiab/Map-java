@@ -24,7 +24,7 @@ public class Main {
     }
     public static void main(String[] args) {
 
-        List<String> words = Arrays.asList("mand", "han", "dig");
+       /* List<String> words = Arrays.asList("mand", "han", "dig");
         String urlEb = "https://ekstrabladet.dk/";
         UrlReader urlReader = new UrlReader();
         Map<String, Integer> mapWords = urlReader.readUrl(urlEb, words);
@@ -32,8 +32,13 @@ public class Main {
 
         //var obj =("hej med dig".indexOf("hej"));
         //System.out.println(obj);
+*/
 
-
+        List<String> words = Arrays.asList("Bliv", "<div", "<h", "tre");
+        List<String> urls = Arrays.asList("https://ekstrabladet.dk/","https://dr.dk/","https://bt.dk/");
+        UrlReader urlReader = new UrlReader();
+        Map<String, Map<String, Integer>> urlsMap = urlReader.readUrls(urls, words);
+        urlsMap.forEach((url, value) -> System.out.println(url + " value = " +value));
 
     }
 

@@ -43,4 +43,16 @@ public class UrlReader {
 
         return mapWords;
     }
-}
+
+
+    public Map<String, Map<String, Integer>> readUrls (List<String> urls, List<String> words) {
+        Map<String, Map<String, Integer>> outerMap = new HashMap<>();
+        for (String url : urls) {
+            Map<String, Integer> innerMap = new HashMap<>();
+            innerMap = this.readUrl(url, words);
+            outerMap.put(url, innerMap);
+
+        }
+        return outerMap;
+    }
+    }
